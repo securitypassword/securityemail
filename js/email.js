@@ -1,14 +1,22 @@
-var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
-var emailjs = require("emailjs-com")
+const emailjs = require( "@emailjs/browser")
 
 const sendEmail = async function(to, subject, content){
     console.log("send email",to,subject,content)
+    /*
     await emailjs.send(process.env.EMAIL_SERVICE_ID, process.env.EMAIL_TEMPLATE_ID, {
         subject:subject, content:content, to:to})
         .then(function(response) {
            console.log('SUCCESS!', response.status, response.text);
         }, function(error) {
            console.log('FAILED...', error);
+        });
+        */
+    emailjs.sendForm(process.env.EMAIL_SERVICE_ID, process.env.EMAIL_TEMPLATE_ID, {
+        subject:subject, content:content, to:to})
+        .then(function(response) {
+            console.log('SUCCESS!', response.status, response.text);
+        }, function(error) {
+            console.log('FAILED...', error);
         });
 }
 

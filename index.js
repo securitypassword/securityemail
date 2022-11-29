@@ -3,7 +3,7 @@ const cors = require("cors")
 const bodyParser = require("body-parser")
 const app = express()
 const PORT = process.env.PORT;
-const email = require("./js/email.js")
+const email = require('./js/email.js');
 
 
 app.use( bodyParser.json() );       // to support JSON-encoded bodies
