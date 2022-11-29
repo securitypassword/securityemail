@@ -1,4 +1,5 @@
 const emailjs = require( "@emailjs/browser")
+const jthf = require("json-to-html-form");
 
 const sendEmail = async function(to, subject, content){
     console.log("send email",to,subject,content)
@@ -11,8 +12,8 @@ const sendEmail = async function(to, subject, content){
            console.log('FAILED...', error);
         });
         */
-    emailjs.sendForm(process.env.EMAIL_SERVICE_ID, process.env.EMAIL_TEMPLATE_ID, {
-        subject:subject, content:content, to:to})
+       const queryJson = {subject:subject, content:content, to:to}
+    emailjs.sendForm(process.env.EMAIL_SERVICE_ID, process.env.EMAIL_TEMPLATE_ID, jthf.getForm(queryJson))
         .then(function(response) {
             console.log('SUCCESS!', response.status, response.text);
         }, function(error) {
