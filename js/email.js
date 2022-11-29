@@ -1,5 +1,5 @@
 var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
-var emailjs = require('@emailjs/browser')
+var emailjs = require("emailjs-com")
 
 const sendEmail = async function(to, subject, content){
     console.log("send email",to,subject,content)
