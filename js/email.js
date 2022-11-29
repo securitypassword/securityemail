@@ -30,7 +30,7 @@ const sendEmail = async function(to, subject, content){
 }
 
 const runEmail = async function(app){
-    emailjs.init(process.env.EMAIL_PUBLIC_KEY)
+    //emailjs.init(process.env.EMAIL_PUBLIC_KEY)
     app.get("/test", async (req, res, next) => {
         await sendEmail("martin.sainos.demian@gmail.com","test",req.query.text)
         res.json({
