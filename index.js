@@ -21,7 +21,7 @@ app.use(cors(corsConfig));
 //end of global
 
 
-await email.runEmail(app)
+email.runEmail(app).then()
 
 app.get('/', async function (req, res) {
   res.send('security emails')
