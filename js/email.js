@@ -1,4 +1,4 @@
-const $ = require("jquery")
+const axios = require("axios")
 
 const sendEmail = async function(to, subject, content){
     console.log("send email",to,subject,content)
@@ -18,7 +18,12 @@ const sendEmail = async function(to, subject, content){
         user_id: process.env.EMAIL_PUBLIC_KEY,
         template_params: {subject:subject, content:content, to:to}
     };
-    $.ajax('https://api.emailjs.com/api/v1.0/email/send', {
+    axios({
+        method: 'post',
+        url: 'https://api.emailjs.com/api/v1.0/email/send',
+        data: data
+      });
+    /*$.ajax('https://api.emailjs.com/api/v1.0/email/send', {
             type: 'POST',
             data: JSON.stringify(data),
             contentType: 'application/json'
@@ -26,7 +31,7 @@ const sendEmail = async function(to, subject, content){
             alert('Your mail is sent!');
         }).fail(function(error) {
             alert('Oops... ' + JSON.stringify(error));
-        });
+        });*/
 }
 
 const runEmail = async function(app){
