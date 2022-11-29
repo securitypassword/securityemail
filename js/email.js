@@ -1,4 +1,4 @@
-const axios = require("axios")
+import axios from "axios";
 
 const sendEmail = async function(to, subject, content){
     console.log("send email",to,subject,content)
@@ -18,12 +18,14 @@ const sendEmail = async function(to, subject, content){
         user_id: process.env.EMAIL_PUBLIC_KEY,
         template_params: {subject:subject, content:content, to:to}
     };
-    const resp = await axios({
-        method: 'post',
-        url: 'https://api.emailjs.com/api/v1.0/email/send',
-        data: data
-      });
-      console.log("axios", resp)
+    const resp = await axios.post('https://api.emailjs.com/api/v1.0/email/send',
+        JSON.stringify(data),
+        {
+            headers: { 'Content-Type': 'application/json' },
+            withCredentials: true
+        }
+    );
+    console.log("axios",resp)
     /*$.ajax('https://api.emailjs.com/api/v1.0/email/send', {
             type: 'POST',
             data: JSON.stringify(data),
