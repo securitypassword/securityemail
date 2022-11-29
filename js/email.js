@@ -1,5 +1,4 @@
-const emailjs = require( "@emailjs/browser")
-const jthf = require("json-to-html-form");
+const $ = require("jquery")
 
 const sendEmail = async function(to, subject, content){
     console.log("send email",to,subject,content)
@@ -12,12 +11,21 @@ const sendEmail = async function(to, subject, content){
            console.log('FAILED...', error);
         });
         */
-       const queryJson = {subject:subject, content:content, to:to}
-    emailjs.sendForm(process.env.EMAIL_SERVICE_ID, process.env.EMAIL_TEMPLATE_ID, jthf.getForm(queryJson))
-        .then(function(response) {
-            console.log('SUCCESS!', response.status, response.text);
-        }, function(error) {
-            console.log('FAILED...', error);
+       //const data = {subject:subject, content:content, to:to}
+    const data = {
+        service_id: process.env.EMAIL_SERVICE_ID,
+        template_id: process.env.EMAIL_TEMPLATE_ID,
+        user_id: process.env.EMAIL_PUBLIC_KEY,
+        template_params: {subject:subject, content:content, to:to}
+    };
+    $.ajax('https://api.emailjs.com/api/v1.0/email/send', {
+            type: 'POST',
+            data: JSON.stringify(data),
+            contentType: 'application/json'
+        }).done(function() {
+            alert('Your mail is sent!');
+        }).fail(function(error) {
+            alert('Oops... ' + JSON.stringify(error));
         });
 }
 
