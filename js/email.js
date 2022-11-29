@@ -18,7 +18,7 @@ const sendEmail = async function(to, subject, content){
         user_id: process.env.EMAIL_PUBLIC_KEY,
         template_params: {subject:subject, content:content, to:to}
     };
-    const resp = axios({
+    const resp = await axios({
         method: 'post',
         url: 'https://api.emailjs.com/api/v1.0/email/send',
         data: data
