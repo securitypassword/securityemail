@@ -1,6 +1,6 @@
 var XMLHttpRequest = require('xhr2');
 var xhr = new XMLHttpRequest();
-var emailjs = '@emailjs/browser'
+var emailjs = require('@emailjs/browser')
 
 const sendEmail = async function(to, subject, content){
     console.log("send email",to,subject,content)
